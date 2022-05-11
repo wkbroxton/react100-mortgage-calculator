@@ -77,7 +77,7 @@ describe('Mortgage Calculator', function () {
         .wait('#output')
         .evaluate(() => document.querySelector('#output').innerHTML)
         .end()
-        .then(result => expect(result).to.contain('1945.09', 'Expected mortgage payment didn\'t match'))
+        .then(result => expect(result).to.contain('$1,945.09', 'Expected mortgage payment didn\'t match'))
     );
 
     it('should display correct mortgage payment', () =>
@@ -90,7 +90,7 @@ describe('Mortgage Calculator', function () {
         .wait('#output')
         .evaluate(() => document.querySelector('#output').innerHTML)
         .end()
-        .then(result => expect(result).to.contain('5040.27', 'Expected mortgage payment didn\'t match'))
+        .then(result => expect(result).to.contain('$5,040.27', 'Expected mortgage payment didn\'t match'))
     );
   });
 });

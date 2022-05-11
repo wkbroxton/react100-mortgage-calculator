@@ -7,21 +7,25 @@ export default class App extends React.Component {
       balance: 0,
       rate: 0,
       term: "Select a Term",
+      output: "",
     };
     this.onChange = this.onChange.bind(this);
-    this.handleClickEvent = this.handleClickEvent.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   onChange(event){
-    console.log(event.target.name)
-    console.log(event.target.value)
-    this.setState({
-      [event.target.name]:parseFloat(event.target.value)
-    })
-  };
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({ [name]:value});
+  }
 
-  handleClickEvent(){
-    
+  handleClick(){
+    const p = this.state.balance;
+    const r = this.state.rate / 1200;
+    const n = this.state.term *12;
+    const m = ((p*(r * Math.pow(1 + r,n))/(Math.pow(1 + r,n) - 1)).toFixed(2));
+
+    this.setState({output: m });
   };
 
 
@@ -46,15 +50,25 @@ export default class App extends React.Component {
             <div className="col-sm-10">
               <select type="text" className="form-control" name="term" placeholder="Select Term in Years" onChange={this.onChange} defaultValue={this.state.term}>
                 <option disabled>Select a Term</option>
-                <option value="15">15</option>
-                <option value="30">30</option>
+                <option value="10">10 Years</option>
+                <option value="15">15 Years</option>
+                <option value="30">30 Years</option>
               </select>
             </div>
           </div>
           <div className="form-group">
             <div className="col-sm-offset-2 col-sm-10">
-              <button type="submit" className="submit btn btn-default" name="submit" onClick={this.handleClickEvent}>Submit</button>
+              <button type="submit" className="submit btn btn-default" name="submit" onClick={this.handleClick}>Submit</button>
             </div>
+            <div id='output'>
+              Your Monthly Payment is {""} { new Intl.NumberFormat('dollars', {
+
+     style: 'currency',
+
+    currency: 'USD'
+
+   }).format(this.state.output)}
+   </div>
           </div>
       </div>
     );

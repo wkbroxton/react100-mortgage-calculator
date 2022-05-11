@@ -60,16 +60,10 @@ export default class App extends React.Component {
             <div className="col-sm-offset-2 col-sm-10">
               <button type="submit" className="submit btn btn-default" name="submit" onClick={this.handleClick}>Submit</button>
             </div>
-            <div id='output'>
-              Your Monthly Payment is {""} { new Intl.NumberFormat('dollars', {
-
-     style: 'currency',
-
-    currency: 'USD'
-
-   }).format(this.state.output)}
-   </div>
           </div>
+            <span id='output'>
+              Your Monthly Payment is {""} { new Intl.NumberFormat('dollars', {style: 'currency', currency: 'USD'}).format(this.state.output)}
+            </span>
       </div>
     );
   }
